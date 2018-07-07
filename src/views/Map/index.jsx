@@ -1,14 +1,14 @@
 import React from 'react'
-import Map from '../Map'
+import MapComponent from '../../components/MapComponent'
 import * as styles from './styles'
 
-const Main = () => {
+const Map = () => {
   const { StyledContainer } = styles
   return (
     <StyledContainer>
-      <Map />
+      <MapComponent />
     </StyledContainer>
   )
 }
 
-export default Main
+export default Map

@@ -5,5 +5,5 @@ import styled from 'styled-components'
 export const StyledContainer = styled.div`
   display: flex;
   height: 100vh;
-  width: 100%;
+  width: 50%;
 `
