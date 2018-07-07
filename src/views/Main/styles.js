@@ -11,6 +11,6 @@ export const StyledContainer = styled.div`
 
 export const StyledInnerContainer = styled.div`
   display: flex;
-  height: 100%;
+  height: 90%;
   width: 100%;
 `

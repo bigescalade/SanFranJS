@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import GoogleMapReact from 'google-map-react'
 import Marker from './marker'
 
-const Map = (props) => {
+const MapComponent = (props) => {
   const { center, zoom } = props
   const { GOOGLE_MAPS_API_KEY } = process.env
+
   return (
     <GoogleMapReact defaultCenter={center} defaultZoom={zoom} key={GOOGLE_MAPS_API_KEY}>
       <Marker lat={37.77} lng={-122.43} text="test marker" />
@@ -13,17 +14,17 @@ const Map = (props) => {
   )
 }
 
-Map.defaultProps = {
+MapComponent.defaultProps = {
   center: {
     lat: 37.77,
     lng: -122.43,
   },
-  zoom: 11,
+  zoom: 12,
 }
 
-Map.propTypes = {
+MapComponent.propTypes = {
   center: PropTypes.shape,
   zoom: PropTypes.number,
 }
 
-export default Map
+export default MapComponent
