@@ -1,12 +1,18 @@
 import React from 'react'
+import HeaderBar from '../HeaderBar'
+import Cards from '../Cards'
 import Map from '../Map'
 import * as styles from './styles'
 
 const Main = () => {
-  const { StyledContainer } = styles
+  const { StyledContainer, StyledInnerContainer } = styles
   return (
     <StyledContainer>
-      <Map />
+      <HeaderBar />
+      <StyledInnerContainer>
+        <Cards />
+        <Map />
+      </StyledInnerContainer>
     </StyledContainer>
   )
 }

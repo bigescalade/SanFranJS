@@ -4,6 +4,9 @@ import styled from 'styled-components'
 
 export const StyledContainer = styled.div`
   display: flex;
-  height: 100%;
-  width: 50%;
+  height: 4em;
+  width: 100%;
+  background-colour: black;
+  justify-content: center;
+  align-items: center;
 `
