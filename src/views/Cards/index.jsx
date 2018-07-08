@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import uniq from 'lodash/uniq'
+import fuzzy from 'fuzzy'
 import CardComponent from '../../components/CardComponent'
 import * as styles from './styles'
 import request from '../../helpers/api'
-import AppProvider, { AppContext } from '../../helpers/provider'
+import { AppContext } from '../../helpers/provider'
 
 class Cards extends Component {
   constructor() {
@@ -24,19 +25,18 @@ class Cards extends Component {
     const uniqueNameArray = []
     const locations = request()
 
-    locations.forEach((movie) => {
-      uniqueNameArray.push(movie.title)
-    })
+    locations.map(movie => uniqueNameArray.push(movie.title))
 
     this.setState({ uniqueNames: uniq(uniqueNameArray) })
   }
 
   filterByTitle(searchQuery) {
     const { uniqueNames } = this.state
+    const fuzzySearch = fuzzy.filter(searchQuery, uniqueNames)
 
-    return uniqueNames
-      .filter(title => title === searchQuery)
-      .map((title, index) => <CardComponent key={`titleCard_${index.toString()}`} title={title} />)
+    return fuzzySearch.map((title, index) => (
+      <CardComponent key={`titleCard_${index.toString()}`} title={title.string} />
+    ))
   }
 
   render() {

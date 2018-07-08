@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react'
 
 export const AppContext = React.createContext()
@@ -8,7 +9,7 @@ class AppProvider extends Component {
 
     this.state = {
       searchQuery: '',
-      updateSearch: (text) => {
+      updateSearch: text => {
         this.setState({ searchQuery: text })
       },
     }
