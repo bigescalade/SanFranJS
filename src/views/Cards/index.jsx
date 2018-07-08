@@ -3,6 +3,7 @@ import uniq from 'lodash/uniq'
 import CardComponent from '../../components/CardComponent'
 import * as styles from './styles'
 import request from '../../helpers/api'
+import AppProvider, { AppContext } from '../../helpers/provider'
 
 class Cards extends Component {
   constructor() {
@@ -12,6 +13,7 @@ class Cards extends Component {
     }
 
     this.boundUniqueNames = this.uniqueNames.bind(this)
+    this.boundFilterByTitle = this.filterByTitle.bind(this)
   }
 
   componentWillMount() {
@@ -29,14 +31,21 @@ class Cards extends Component {
     this.setState({ uniqueNames: uniq(uniqueNameArray) })
   }
 
+  filterByTitle(searchQuery) {
+    const { uniqueNames } = this.state
+
+    return uniqueNames
+      .filter(title => title === searchQuery)
+      .map((title, index) => <CardComponent key={`titleCard_${index.toString()}`} title={title} />)
+  }
+
   render() {
     const { StyledContainer } = styles
-    const { uniqueNames } = this.state
     return (
       <StyledContainer>
-        {uniqueNames.map((title, index) => (
-          <CardComponent key={`titleCard_${index.toString()}`} title={title} />
-        ))}
+        <AppContext.Consumer>
+          {context => this.boundFilterByTitle(context.searchQuery)}
+        </AppContext.Consumer>
       </StyledContainer>
     )
   }
