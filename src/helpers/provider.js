@@ -1,7 +1,9 @@
 /* eslint-disable */
 import React, { Component } from 'react'
+import request, { geocode } from '../helpers/api'
 
 export const AppContext = React.createContext()
+const locations = request()
 
 class AppProvider extends Component {
   constructor() {
@@ -9,10 +11,58 @@ class AppProvider extends Component {
 
     this.state = {
       searchQuery: '',
+      selectedMovie: '',
       updateSearch: text => {
         this.setState({ searchQuery: text })
       },
+      selectMovie: value => {
+        this.setState({ selectedMovie: value }, this.boundGetMovieLocations)
+      },
+      geomArray: [],
     }
+
+    this.boundGetMovieLocations = this.getMovieLocations.bind(this)
+    this.boundGetGeoms = this.getGeoms.bind(this)
+  }
+
+  getMovieLocations() {
+    const { selectedMovie } = this.state
+    console.log(selectedMovie)
+
+    if (selectedMovie) {
+      const locationArray = locations
+        .filter(loc => loc.title === selectedMovie && loc.locations)
+        .map(filteredMovie => {
+          const { title, locations } = filteredMovie
+          return { title, location: locations }
+        })
+
+      this.boundGetGeoms(locationArray)
+    }
+  }
+
+  getGeoms(locationArray) {
+    const geomArray = []
+    const promiseArray = []
+    locationArray.map(movie => {
+      const promise = geocode(movie.location)
+        .then(
+          result =>
+            !!result.geometry.location &&
+            geomArray.push({
+              title: movie.title,
+              geom: result.geometry.location,
+              location: result.formatted_address,
+            }),
+        )
+        .catch(error => console.error(error))
+
+      promiseArray.push(promise)
+    })
+
+    Promise.all(promiseArray).then(() => {
+      this.setState({ geomArray })
+    })
   }
 
   render() {

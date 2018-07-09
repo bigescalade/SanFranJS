@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 export const StyledContainer = styled.div`
   display: flex;
+  width: ${props => (props.grow ? '200px' : 'auto')};
 `
 
 export const StyledMarker = styled.div`
@@ -28,9 +29,25 @@ export const StyledMarker = styled.div`
   }
 `
 
-export const StyledInfoText = styled.div`
+export const StyledInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   background-color: white;
   margin-left: 5px;
   padding: 5px 20px;
   border-radius: 5px;
+  width: 250px;
+  align-items: center;
+  z-index: 100;
+`
+
+export const StyledInfoHeading = styled.h1`
+  font-size: 1.1rem;
+  text-align: center;
+  font-weight: bold;
+`
+
+export const StyledInfoText = styled.p`
+  font-size: 0.8rem;
+  text-align: center;
 `

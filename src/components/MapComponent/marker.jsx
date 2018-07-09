@@ -20,9 +20,15 @@ class Marker extends Component {
   }
 
   render() {
-    const { StyledContainer, StyledMarker, StyledInfoText } = styles
+    const {
+      StyledContainer,
+      StyledMarker,
+      StyledInfoContainer,
+      StyledInfoHeading,
+      StyledInfoText,
+    } = styles
     const { showInfoWindow } = this.state
-    const { text } = this.props
+    const { title, text } = this.props
 
     return (
       <StyledContainer
@@ -30,19 +36,27 @@ class Marker extends Component {
         onMouseOut={this.boundHandleInfoWindow}
         onBlur={this.boundHandleInfoWindow}
         onFocus={this.boundHandleInfoWindow}
+        grow={showInfoWindow}
       >
         <StyledMarker />
-        {!!showInfoWindow && <StyledInfoText>{text}</StyledInfoText>}
+        {!!showInfoWindow && (
+          <StyledInfoContainer>
+            <StyledInfoHeading>{title}</StyledInfoHeading>
+            <StyledInfoText>{text}</StyledInfoText>
+          </StyledInfoContainer>
+        )}
       </StyledContainer>
     )
   }
 }
 
 Marker.defaultProps = {
+  title: '',
   text: '',
 }
 
 Marker.propTypes = {
+  title: PropTypes.string,
   text: PropTypes.string,
 }
 

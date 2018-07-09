@@ -57,8 +57,10 @@ class SearchComponent extends Component {
               items={uniqueNamesObjects}
               shouldItemRender={item => item.title.toLowerCase()}
               getItemValue={item => item.title}
-              renderItem={item => <StyledItemContainer>{item.title}</StyledItemContainer>}
-              value={value}
+              renderItem={item => (
+                <StyledItemContainer key={item.title}>{item.title}</StyledItemContainer>
+              )}
+              value={!value ? context.searchQuery : value}
               onChange={(e) => {
                 this.searchByTitle(e.target.value)
                 context.updateSearch(e.target.value)
@@ -66,6 +68,7 @@ class SearchComponent extends Component {
               onSelect={(selectedValue) => {
                 this.setState({ value: selectedValue })
                 context.updateSearch(selectedValue)
+                context.selectMovie(selectedValue)
               }}
             />
           )}
