@@ -16,15 +16,19 @@ const MapComponent = (props) => {
           defaultZoom={zoom}
           bootstrapURLKeys={{ key: GOOGLE_MAPS_API_KEY }}
         >
-          {context.geomArray.map((geomObject, index) => (
-            <Marker
-              key={`marker${index.toString()}`}
-              lat={geomObject.geom.lat}
-              lng={geomObject.geom.lng}
-              title={geomObject.title}
-              text={geomObject.location}
-            />
-          ))}
+          {context.geomArray.map((geomObject, index) => {
+            const { geom, title, location } = geomObject
+            const { lat, lng } = geom
+            return (
+              <Marker
+                key={`marker${index.toString()}`}
+                lat={lat}
+                lng={lng}
+                title={title}
+                text={location}
+              />
+            )
+          })}
         </GoogleMapReact>
       )}
     </AppContext.Consumer>

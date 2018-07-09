@@ -42,9 +42,7 @@ class Cards extends Component {
   }
 
   uniqueMovies(locations) {
-    const uniqueMovieArray = []
-
-    locations.map(movie => uniqueMovieArray.push({
+    const uniqueMovieArray = locations.map(movie => ({
       title: movie.title,
       actor1: movie.actor_1,
       actor2: movie.actor_2,

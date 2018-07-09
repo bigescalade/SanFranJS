@@ -15,7 +15,8 @@ class AppProvider extends Component {
         this.setState({ searchQuery: text })
       },
       selectMovie: value => {
-        this.setState({ selectedMovie: value }, this.boundGetMovieLocations)
+        this.setState({ selectedMovie: value })
+        request().then(locations => this.boundGetMovieLocations(locations))
       },
       geomArray: [],
     }
@@ -45,8 +46,7 @@ class AppProvider extends Component {
 
   getGeoms(locationArray) {
     const geomArray = []
-    const promiseArray = []
-    locationArray.map(movie => {
+    const promiseArray = locationArray.map(movie => {
       const promise = geocode(movie.location)
         .then(
           result =>
@@ -58,8 +58,7 @@ class AppProvider extends Component {
             }),
         )
         .catch(error => console.error(error))
-
-      promiseArray.push(promise)
+      return promise
     })
 
     Promise.all(promiseArray).then(() => {
