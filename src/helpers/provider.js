@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import request, { geocode } from '../helpers/api'
 
 export const AppContext = React.createContext()
-const locations = request()
 
 class AppProvider extends Component {
   constructor() {
@@ -25,9 +24,12 @@ class AppProvider extends Component {
     this.boundGetGeoms = this.getGeoms.bind(this)
   }
 
-  getMovieLocations() {
+  componentWillMount() {
+    request().then(locations => this.boundGetMovieLocations(locations))
+  }
+
+  getMovieLocations(locations) {
     const { selectedMovie } = this.state
-    console.log(selectedMovie)
 
     if (selectedMovie) {
       const locationArray = locations

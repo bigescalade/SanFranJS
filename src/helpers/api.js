@@ -1,34 +1,18 @@
 import axios from 'axios'
-import locations from './locations'
 
 const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-
-// export default function request(url, type) {
-//   axios
-//     .get(url)
-//     .then((response) => {
-//       switch (type) {
-//         case 'map':
-//           console.log(response.data)
-//           break
-//         case 'card':
-//           console.log(response.data)
-//           break
-//         default:
-//           break
-//       }
-//     })
-//     .catch()
-// }
+const GOOGLE_GEOCODE_URL = 'https://maps.googleapis.com/maps/api/geocode/json'
 
 export default function request() {
-  return locations
+  return axios
+    .get('https://data.sfgov.org/resource/wwmu-gmzc.json?$limit=2000')
+    .then(response => response.data)
 }
 
 export function geocode(location) {
   return axios
     .get(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${GOOGLE_MAPS_API_KEY}`,
+      `${GOOGLE_GEOCODE_URL}?address=${location}&key=${GOOGLE_MAPS_API_KEY}`,
     )
     .then(response => response.data.results[0])
 }

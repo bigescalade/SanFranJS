@@ -1,29 +1,29 @@
 import React, { Component } from 'react'
-import uniq from 'lodash/uniq'
+import uniqWith from 'lodash/uniqWith'
+import isEqual from 'lodash/isEqual'
+import get from 'lodash/get'
 import fuzzy from 'fuzzy'
 import CardComponent from '../../components/CardComponent'
 import * as styles from './styles'
 import request from '../../helpers/api'
 import { AppContext } from '../../helpers/provider'
 
-const locations = request()
-
 class Cards extends Component {
   constructor() {
     super()
     this.state = {
-      uniqueNames: [],
+      uniqueMovies: [],
       showMoreDetails: false,
     }
 
-    this.boundUniqueNames = this.uniqueNames.bind(this)
+    this.boundUniqueMovies = this.uniqueMovies.bind(this)
     this.boundFilterByTitle = this.filterByTitle.bind(this)
     this.boundHandleOnClick = this.handleOnClick.bind(this)
     this.boundUpdateContext = this.updateContext.bind(this)
   }
 
   componentWillMount() {
-    this.boundUniqueNames()
+    request().then(locations => this.boundUniqueMovies(locations))
   }
 
   handleOnClick(context, title) {
@@ -41,25 +41,53 @@ class Cards extends Component {
     }
   }
 
-  uniqueNames() {
-    const uniqueNameArray = []
+  uniqueMovies(locations) {
+    const uniqueMovieArray = []
 
-    locations.map(movie => uniqueNameArray.push(movie.title))
-    this.setState({ uniqueNames: uniq(uniqueNameArray) })
+    locations.map(movie => uniqueMovieArray.push({
+      title: movie.title,
+      actor1: movie.actor_1,
+      actor2: movie.actor_2,
+      actor3: movie.actor_3,
+      director: movie.director,
+      productionCompany: movie.production_company,
+      releaseYear: movie.release_year,
+      writer: movie.writer,
+    }))
+    this.setState({ uniqueMovies: uniqWith(uniqueMovieArray, isEqual) })
   }
 
   filterByTitle(context, searchQuery) {
-    const { uniqueNames, showMoreDetails } = this.state
-    const fuzzySearch = fuzzy.filter(searchQuery, uniqueNames)
+    const { uniqueMovies, showMoreDetails } = this.state
 
-    return fuzzySearch.map((title, index) => (
-      <CardComponent
-        key={`titleCard_${index.toString()}`}
-        title={title.string}
-        onClick={() => this.boundHandleOnClick(context, title.string)}
-        button={showMoreDetails ? 'back' : 'details'}
-      />
-    ))
+    const options = {
+      extract(element) {
+        return element.title
+      },
+    }
+
+    const fuzzySearch = fuzzy.filter(searchQuery, uniqueMovies, options)
+
+    return fuzzySearch.map((title, index) => {
+      const movie = uniqueMovies[index]
+      return (
+        <CardComponent
+          key={`titleCard_${index.toString()}`}
+          title={title.string}
+          actors={`
+          ${get(movie, 'actor1', '')}
+          ${get(movie, 'actor2', '')}
+          ${get(movie, 'actor3', '')}
+        `}
+          director={movie.director}
+          productionCompany={movie.productionCompany}
+          releaseYear={movie.releaseYear}
+          writer={movie.writer}
+          onClick={() => this.boundHandleOnClick(context, title.string)}
+          button={showMoreDetails ? 'go back' : 'show on map'}
+        />
+      )
+    })
   }
 
   render() {

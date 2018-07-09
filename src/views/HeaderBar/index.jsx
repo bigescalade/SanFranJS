@@ -1,13 +1,12 @@
 import React from 'react'
 import SearchComponent from '../../components/SearchComponent'
 import * as styles from './styles'
-import { GlobalHeading } from '../../styles/global'
 
 const HeaderBar = () => {
-  const { StyledContainer } = styles
+  const { StyledContainer, StyledHeading } = styles
   return (
     <StyledContainer>
-      <GlobalHeading>SanFranJS</GlobalHeading>
+      <StyledHeading>SanFranJS - a map of filming locations in San Francisco</StyledHeading>
       <SearchComponent />
     </StyledContainer>
   )

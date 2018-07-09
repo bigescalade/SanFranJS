@@ -13,4 +13,5 @@ export const StyledInnerContainer = styled.div`
   display: flex;
   height: 90%;
   width: 100%;
+  margin-top: 150px;
 `

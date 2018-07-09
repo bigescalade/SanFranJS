@@ -1,5 +1,4 @@
 import React from 'react'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import HeaderBar from '../HeaderBar'
 import Cards from '../Cards'
 import Map from '../Map'
@@ -10,15 +9,13 @@ const Main = () => {
   const { StyledContainer, StyledInnerContainer } = styles
   return (
     <AppProvider>
-      <MuiThemeProvider>
-        <StyledContainer>
-          <HeaderBar />
-          <StyledInnerContainer>
-            <Cards />
-            <Map />
-          </StyledInnerContainer>
-        </StyledContainer>
-      </MuiThemeProvider>
+      <StyledContainer>
+        <HeaderBar />
+        <StyledInnerContainer>
+          <Cards />
+          <Map />
+        </StyledInnerContainer>
+      </StyledContainer>
     </AppProvider>
   )
 }

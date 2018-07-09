@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import styled from 'styled-components'
+import { GlobalSubheading, GlobalParagraph } from '../../styles/global'
 
 export const StyledContainer = styled.div`
   display: flex;
@@ -15,7 +16,7 @@ export const StyledMarker = styled.div`
   border-right: 10px solid transparent;
   border-bottom: 0px;
   border-left: 10px solid transparent;
-  transition: 300ms linear all;
+  transition: 100ms linear all;
 
   &:hover {
     -ms-transform: rotate(-90deg);
@@ -25,7 +26,9 @@ export const StyledMarker = styled.div`
     /* Chrome, Safari, Opera */
 
     transform: rotate(-90deg);
-    transition: 300ms linear all;
+    transition: 100ms linear all;
+
+    cursor: pointer;
   }
 `
 
@@ -41,13 +44,10 @@ export const StyledInfoContainer = styled.div`
   z-index: 100;
 `
 
-export const StyledInfoHeading = styled.h1`
-  font-size: 1.1rem;
+export const StyledInfoHeading = GlobalSubheading.extend`
   text-align: center;
-  font-weight: bold;
 `
 
-export const StyledInfoText = styled.p`
-  font-size: 0.8rem;
+export const StyledInfoText = GlobalParagraph.extend`
   text-align: center;
 `
