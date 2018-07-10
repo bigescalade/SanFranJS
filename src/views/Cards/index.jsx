@@ -50,7 +50,7 @@ class Cards extends Component {
   }
 
   uniqueMovies(locations) {
-    const uniqueMovieArray = locations.map(movie => ({
+    const uniqueMovieArray = locations.filter(movie => movie.locations).map(movie => ({
       title: movie.title,
       actor1: movie.actor_1,
       actor2: movie.actor_2,
@@ -60,6 +60,7 @@ class Cards extends Component {
       releaseYear: movie.release_year,
       writer: movie.writer,
     }))
+
     this.setState({ uniqueMovies: uniqWith(uniqueMovieArray, isEqual) })
   }
 
