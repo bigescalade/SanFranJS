@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { Component } from 'react'
-import request, { geocode } from '../helpers/api'
+import getMovies, { geocode } from '../helpers/api'
 
 export const AppContext = React.createContext()
 
@@ -16,7 +16,7 @@ class AppProvider extends Component {
       },
       selectMovie: value => {
         this.setState({ selectedMovie: value })
-        request().then(locations => this.boundGetMovieLocations(locations))
+        getMovies().then(locations => this.boundGetMovieLocations(locations))
       },
       geomArray: [],
     }
@@ -26,7 +26,7 @@ class AppProvider extends Component {
   }
 
   componentWillMount() {
-    request().then(locations => this.boundGetMovieLocations(locations))
+    getMovies().then(locations => this.boundGetMovieLocations(locations))
   }
 
   getMovieLocations(locations) {

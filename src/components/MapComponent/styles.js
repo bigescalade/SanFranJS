@@ -1,7 +1,38 @@
 /* eslint-disable */
 
 import styled from 'styled-components'
-import { GlobalSubheading, GlobalParagraph } from '../../styles/global'
+import theme from '../../styles/theme'
+import { GlobalHeading, GlobalSubheading, GlobalParagraph } from '../../styles/global'
+
+export const StyledMapContainer = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+`
+
+export const StyledMapInnerContainer = styled.div`
+  display: flex;
+  position: relative;
+  height: 100%;
+  width: 100%;
+`
+
+export const StyledLoadingOverlay = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  z-index: 1000000;
+  background: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+`
+
+export const StyledLoadingText = GlobalHeading.extend`
+  margin-top: 20px;
+  color: ${theme.colorFontLight};
+`
 
 export const StyledContainer = styled.div`
   display: flex;
