@@ -51,3 +51,5 @@ export const StyledButton = styled.button`
   padding: 5px 10px;
   margin: 10px;
 `
+
+StyledButton.displayName = 'StyledButton'
