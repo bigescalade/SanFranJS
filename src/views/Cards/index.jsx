@@ -40,6 +40,10 @@ class Cards extends Component {
       const { showMoreDetails } = this.state
       const updatedTitle = showMoreDetails ? title : ''
 
+      if (updatedTitle === '') {
+        context.clearGeomArray()
+      }
+
       context.updateSearch(updatedTitle)
       context.selectMovie(updatedTitle)
     }

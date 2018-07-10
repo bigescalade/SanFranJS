@@ -18,6 +18,9 @@ class AppProvider extends Component {
         this.setState({ selectedMovie: value })
         getMovies().then(locations => this.boundGetMovieLocations(locations))
       },
+      clearGeomArray: () => {
+        this.setState({ geomArray: [] })
+      },
       geomArray: [],
     }
 
