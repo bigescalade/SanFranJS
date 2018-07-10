@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import styled from 'styled-components'
 import { GlobalHeading } from '../../styles/global'
 
