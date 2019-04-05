@@ -2,7 +2,7 @@
 
 ## SanFranJS
 
-A map of filmin locations in San Francisco built with ReactJS. Check it out at [https://sanfranjs.herokuapp.com/]
+A map of filming locations in San Francisco built with ReactJS. Check it out at [https://sanfranjs.herokuapp.com/]
 
 ### Please note
 This project is no longer maintained
