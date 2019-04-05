@@ -2,9 +2,10 @@
 
 ## SanFranJS
 
-A map of filming locations in San Francisco built with ReactJS. Check it out at [https://sanfranjs.herokuapp.com/]
+A map of filming locations in San Francisco built with ReactJS.
 
 ### Please note
+
 This project is no longer maintained
 
 # Table of Contents
@@ -39,7 +40,8 @@ This project is no longer maintained
 
     - `npm install -g yarn`
     - the node version is a dependency in the package.json file, so the correct version of node will be installed (if using node version 8 or higher)
-5.  You will need a Google Maps API key and a Socrata API key
+
+5.  Add a Google Maps API key and a Socrata API key to a `.envrc` file (see .example.envrc)
 
 # Application Installation Instructions
 
@@ -51,7 +53,7 @@ Run the command `yarn start` in the project root folder to start
 
 # Testing Instructions
 
-No tests
+Run the command `yarn test` in the project root folder
 
 # Overview
 
@@ -59,7 +61,7 @@ This was a coding challenge I did. I was to take a list of filmin locations in S
 
 # Discussion
 
-This project was the first time I used React Context as well as Heroku. React Context is great, allowed me to avoid using Redux on this project. At first I thought Redux would be overkill, towards the end I felt I was getting close to needing it over Context.
+This project was the first time I used React Context. React Context is great, allowed me to avoid using Redux on this project. At first I thought Redux would be overkill, towards the end I felt I was getting close to needing it over Context.
 
 # License
 
